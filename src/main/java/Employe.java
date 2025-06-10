@@ -1,12 +1,9 @@
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.Objects;
-import java.util.Scanner;
-import java.util.UUID;
+import java.io.*;
+import java.lang.reflect.Type;
+import java.util.*;
 
 public class Employe {
     private String idUser;
@@ -86,14 +83,14 @@ public class Employe {
     static Employe employe;
 
 
-    //creation d'une fontion pour enregistrer les données employer dans le json
+    /*//creation d'une fontion pour enregistrer les données employer dans le json
     public static void UserDataWrite () throws IOException {
-        Employe empoye = new Employe("", "Diallo", "Amadou", "jimlecracken13@gmail.com", "", false, false);
+        Employe empoye = new Employe("", "", "", "", "", false, false);
         Gson gson = new Gson();
         String json = gson.toJson(empoye); // Convertit l'objet en JSON
 
         // Écriture dans un fichier
-        try (FileWriter writer = new FileWriter("employe.json")) {
+        try (FileWriter writer = new FileWriter("employes.json")) {
             gson.toJson(empoye, writer);
         }
 
@@ -105,36 +102,56 @@ public class Employe {
         Gson gson = new Gson();
 
         //Lecture depuis un fichier
-        try (FileReader reader = new FileReader("employe.json")){
+        try (FileReader reader = new FileReader("employes.json")){
             employe = gson.fromJson(reader, Employe.class);
 
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
+    }*/
 
 
     //creation de la fonctionnalité connection pour les employés
-    public static void seConnecter () throws FileNotFoundException {
+    public static void seConnecter(String fileName) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Veillez entrer votre email: ");
-        String emailSaisi = scanner.next();
+        Gson gson = new Gson();
+        List<Employe> employes = new ArrayList<>();
 
-        System.out.print("Veillez saisir votre mot de passe: ");
-        String passWord = scanner.next();
+        // Lecture du fichier s'il existe déjà
+        File file = new File(fileName);
+        if (file.exists()) {
+            try (Reader reader = new FileReader(file)) {
+                Type listType = new TypeToken<List<Employe>>(){}.getType();
+                employes = gson.fromJson(reader, listType);
+            } catch (Exception e) {
+                System.out.println("Erreur de lecture : " + e.getMessage());
+            }
+        }
 
-        if (Objects.equals(emailSaisi, employe.getEmail()) && Objects.equals(passWord, employe.getMotDePasse())) {
-            System.out.println("Connection réussi !!!");
+        // Saisie des infos
+        System.out.print("Entrer votre email : ");
+        String emailSaisi = scanner.nextLine();
+
+        System.out.print("Entrer votre mot de passe : ");
+        String passWord = scanner.nextLine();
+
+        // Vérifier si l'email existe déjà
+        boolean existe = (employes.stream().anyMatch(e -> e.getEmail().equalsIgnoreCase(emailSaisi)) &&
+                employes.stream().anyMatch(e -> e.getMotDePasse().equalsIgnoreCase(passWord)));
+        if (existe) {
+            System.out.println("Connection réussi !");
+            return;
         }
 
         else {
-            System.out.println("L'email ou le mot de passe saisi est incorect");
+            System.out.println("L'email ou le mot de passe est incorrect");
         }
-
     }
 
     public static void main(String[] args) throws IOException {
-        UserDataWrite();
+        seConnecter();
     }
+
+
 }
 

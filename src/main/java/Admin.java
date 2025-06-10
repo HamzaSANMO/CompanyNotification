@@ -14,11 +14,12 @@ public class Admin extends Employe{
 
     public Admin(String idUser, String nom, String prenom, String email, String motDePasse, boolean status, boolean roleAdmin) {
         super(idUser, nom, prenom, email, motDePasse, status, roleAdmin);
+        this.setMotDePasse(motDePasse);
     }
    static Admin admin;
 
     //creation d'une fontion pour enregistrer l'admin dans le json apres l'instanciation
-   public static void EcrireFichier () throws IOException {
+   public static void createAdmin () throws IOException {
         Admin admin = new Admin("", "Sanmo", "Hamza", "hamzasanmo@gmail.com", "Admin123", true, true);
        Gson gson = new Gson();
        String json = gson.toJson(admin); // Convertit l'objet en JSON
@@ -31,12 +32,13 @@ public class Admin extends Employe{
        System.out.println("JSON généré : " + json);
    }
 
+
    //fonction pour la lecture d'un objet depuis le fichier json
    public static void LireFichier() throws FileNotFoundException {
         Gson gson = new Gson();
 
         //Lecture depuis un fichier
-       try (FileReader reader = new FileReader("admin.json")){
+       try (FileReader reader = new FileReader("employes.json")){
            admin = gson.fromJson(reader, Admin.class);
 
        } catch (IOException e) {
@@ -44,13 +46,13 @@ public class Admin extends Employe{
        }
    }
 
-   //fonctionnalité pour permettre à l'admin de creér un compte employer
+    //fonctionnalité pour permettre à l'admin de creér un compte employer
    public static void AddUser() {
        Scanner scan = new Scanner(System.in);
        Gson gson = new Gson();
        List<Employe> employes = new ArrayList<>();
 
-       // Lecture du fichier s'il existe déjà
+
        File file = new File("employes.json");
        if (file.exists()) {
            try (Reader reader = new FileReader(file)) {
@@ -82,6 +84,10 @@ public class Admin extends Employe{
        Employe nouvelEmploye = new Employe("", nom, prenom, email, "", false, false);
        employes.add(nouvelEmploye);
 
+       List<Employe> newList = // read data
+       employes.addAll(newList);
+
+
        // Sauvegarde de la liste mise à jour
        try (Writer writer = new FileWriter("employes.json")) {
            gson.toJson(employes, writer);
@@ -91,8 +97,8 @@ public class Admin extends Employe{
        }
    }
 
-    public static void main(String[] args) {
-        AddUser();
+    public static void main(String[] args) throws IOException {
+        createAdmin();
     }
 
    }
