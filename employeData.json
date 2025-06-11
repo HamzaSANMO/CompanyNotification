@@ -1,0 +1,22 @@
+[
+  {
+    "idUser": "d51b1b80-3e58-499f-9708-c9f88bf320ad",
+    "nom": "azerty",
+    "prenom": "qwerty",
+    "email": "1234",
+    "motDePasse": "Kalanso123",
+    "status": false,
+    "roleAdmin": false,
+    "notificationsRecu": []
+  },
+  {
+    "idUser": "3f5be45a-091f-4f59-8a1a-56cecb7d9f7f",
+    "nom": "deate",
+    "prenom": "kfkjfjf",
+    "email": "1234",
+    "motDePasse": "Kalanso123",
+    "status": false,
+    "roleAdmin": false,
+    "notificationsRecu": []
+  }
+]
