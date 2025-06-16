@@ -1,5 +1,5 @@
 package org.example;
 
 public interface ObserverI {
-    void envoyerMessage(String message, ObserverI expediteur);
+    void recevoirMessage(String message, ObserverI expediteur);
 }

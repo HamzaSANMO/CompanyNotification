@@ -52,23 +52,7 @@ public class NotificationSujet implements SujetI {
             }
 
         }
-       /* for (Employe e : users) {
-            for (ObserverAbonneI o : abonnes) {
-                if (o instanceof Employe employe && employe.getNom().equals(e.getNom()) &&
-                        employe.getPrenom().equals(e.getPrenom()) &&
-                        employe.getEmail().equals(e.getEmail()))
 
-                    e = employe;
-
-                }
-            }
-        try {
-            employeRepository.saveEmploye(users);
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-
-        }*/
     }
 
     @Override
@@ -76,7 +60,7 @@ public class NotificationSujet implements SujetI {
         for ( ObserverI abonne : abonnes) {
             //Verifier que l'expediteur d'un message ne le recoit pas son propre message
             if (expediteur != abonne) {
-                abonne.envoyerMessage(message, expediteur);
+                abonne.recevoirMessage(message, expediteur);
             }
         }
     }

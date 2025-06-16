@@ -85,13 +85,20 @@ public class EmployeObserver implements ObserverI {
         return notificationsRecu;
     }
 
+    public String fullName() {
+        return this.getPrenom() + " " + this.getNom();
+    }
+
     public void setNotificationsRecu(List<String> notificationsRecu) {
         this.notificationsRecu = notificationsRecu;
     }
 
     @Override
-    public void envoyerMessage(String message, ObserverI expediteur) {
-
+    public void recevoirMessage(String message, ObserverI expediteur) {
+        //conversion de la variable expediteur en une variable de type EmployerObserver
+        EmployeObserver employer = (EmployeObserver) expediteur;
+        //affichage du message d'un destinataire dans la console
+        System.out.println("Bonjour" + fullName() + ", vous avez reçu un message de " + employer.fullName() + ". Veillez bien vouloir consulter votre boite email.");
     }
 }
 

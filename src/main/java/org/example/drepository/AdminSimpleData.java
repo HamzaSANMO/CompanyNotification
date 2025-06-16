@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonSyntaxException;
 import com.google.gson.reflect.TypeToken;
+import org.example.SimpleDataI;
 import org.example.centity.Admin;
 
 import java.io.*;
@@ -12,14 +13,15 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AdminSimpleData {
+public class AdminSimpleData implements SimpleDataI<Admin> {
     //constante qui stock le nom de nom de notre fichier json
     private final String filename = "adminData.json";
     //creation d'un objet gson avec un formatage bien lisible pour sauvegarder er charger nos donnees gson
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     //ecrire une liste d'admin dans le gson
-    public void saveAdmin (List<Admin> admins) throws IOException {
+    @Override
+    public void saveFile(List<Admin> admins) throws IOException {
         try {
             Writer writer = new FileWriter(filename);
             //transforme la liste des admins en json puis l'ecrit dans le fichier
@@ -32,7 +34,8 @@ public class AdminSimpleData {
     }
 
     //methode pour lire une liste d'amdins dans le fichier json
-    public List<Admin> loadAdmin () {
+    @Override
+    public List<Admin> loadFile() {
         try {
             Reader reader = new FileReader(filename);
             Type type = new TypeToken<List<Admin>>(){}.getType();
