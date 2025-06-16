@@ -1,49 +1,50 @@
 package org.example.bservice;
 
-import org.example.centity.Employe;
-import org.example.centity.ObserverAbonneI;
-import org.example.drepository.EmployeRepository;
+import org.example.SujetI;
+import org.example.centity.EmployeObserver;
+import org.example.ObserverI;
+import org.example.drepository.EmployeSimpleData;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NotificationService implements SujetNotificationI{
-    private List<ObserverAbonneI> abonnes = new ArrayList<>();
-    private EmployeRepository employeRepository;
+public class NotificationSujet implements SujetI {
+    private List<ObserverI> abonnes = new ArrayList<>();
+    private EmployeSimpleData employeSimpleData;
 
     // Injection de dependance
-    public NotificationService(EmployeRepository employeRepository) {
-        this.employeRepository = employeRepository;
+    public NotificationSujet(EmployeSimpleData employeSimpleData) {
+        this.employeSimpleData = employeSimpleData;
     }
 
     @Override
     //methode pour ajouter un abonné en changeant sont status par true
-    public void sAbonner(ObserverAbonneI user) {
+    public void sAbonner(ObserverI user) {
         abonnes.add(user);
-        updateStatus( (Employe) user,true);
+        updateStatus( (EmployeObserver) user,true);
 
     }
 
     @Override
     //methode pour ajouter un abonné en changeant sont status par true
-    public void seDesabonner(ObserverAbonneI user) {
+    public void seDesabonner(ObserverI user) {
         abonnes.remove(user);
-        updateStatus( (Employe) user,false);
+        updateStatus( (EmployeObserver) user,false);
 
     }
 
     //Mises a jour de la propriete status d'un enployé
-    public void updateStatus(Employe user, boolean status){
-        List<Employe> users = employeRepository.loadEmploye();
+    public void updateStatus(EmployeObserver user, boolean status){
+        List<EmployeObserver> users = employeSimpleData.loadFile();
 
-        for (Employe e : users) {
+        for (EmployeObserver e : users) {
             if (e.getNom().equals(user.getNom()) && e.getEmail().equals(user.getEmail())) {
                 e.setStatus(status);
             }
 
             try {
-                employeRepository.saveEmploye(users);
+                employeSimpleData.saveFile(users);
             }
 
             catch (IOException c) {
@@ -71,8 +72,8 @@ public class NotificationService implements SujetNotificationI{
     }
 
     @Override
-    public void notifierAbonner(String message, ObserverAbonneI expediteur) {
-        for ( ObserverAbonneI abonne : abonnes) {
+    public void notifierAbonner(String message, ObserverI expediteur) {
+        for ( ObserverI abonne : abonnes) {
             //Verifier que l'expediteur d'un message ne le recoit pas son propre message
             if (expediteur != abonne) {
                 abonne.envoyerMessage(message, expediteur);
@@ -81,7 +82,7 @@ public class NotificationService implements SujetNotificationI{
     }
 
     @Override
-    public boolean estAbonne(ObserverAbonneI utilisateur) {
+    public boolean estAbonne(ObserverI utilisateur) {
         return false;
     }
 }

@@ -1,13 +1,10 @@
 package org.example.centity;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import org.example.ObserverI;
 
-import java.io.*;
-import java.lang.reflect.Type;
 import java.util.*;
 
-public class Employe implements ObserverAbonneI {
+public class EmployeObserver implements ObserverI {
     private String idUser;
     private String nom;
     private String prenom;
@@ -17,7 +14,7 @@ public class Employe implements ObserverAbonneI {
     private boolean roleAdmin; // par defaut est false chez Employe, True chez Admin
     private List<String> notificationsRecu;
 
-    public Employe(String nom, String prenom, String email) {
+    public EmployeObserver(String nom, String prenom, String email) {
         this.idUser = UUID.randomUUID().toString();
         this.nom = nom;
         this.prenom = prenom;
@@ -93,7 +90,7 @@ public class Employe implements ObserverAbonneI {
     }
 
     @Override
-    public void envoyerMessage(String message, ObserverAbonneI expediteur) {
+    public void envoyerMessage(String message, ObserverI expediteur) {
 
     }
 }

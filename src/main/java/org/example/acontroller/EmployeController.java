@@ -2,7 +2,7 @@ package org.example.acontroller;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import org.example.centity.Employe;
+import org.example.centity.EmployeObserver;
 
 import java.io.File;
 import java.io.FileReader;
@@ -17,14 +17,14 @@ public class EmployeController {
     public static void seConnecter(String fileName) {
         Scanner scanner = new Scanner(System.in);
         Gson gson = new Gson();
-        List<Employe> employes = new ArrayList<>();
+        List<EmployeObserver> employeObservers = new ArrayList<>();
 
         // Lecture du fichier s'il existe déjà
         File file = new File(fileName);
         if (file.exists()) {
             try (Reader reader = new FileReader(file)) {
-                Type listType = new TypeToken<List<Employe>>(){}.getType();
-                employes = gson.fromJson(reader, listType);
+                Type listType = new TypeToken<List<EmployeObserver>>(){}.getType();
+                employeObservers = gson.fromJson(reader, listType);
             } catch (Exception e) {
                 System.out.println("Erreur de lecture : " + e.getMessage());
             }
@@ -38,8 +38,8 @@ public class EmployeController {
         String passWord = scanner.nextLine();
 
         // Vérifier si l'email existe déjà
-        boolean existe = (employes.stream().anyMatch(e -> e.getEmail().equalsIgnoreCase(emailSaisi)) &&
-                employes.stream().anyMatch(e -> e.getMotDePasse().equalsIgnoreCase(passWord)));
+        boolean existe = (employeObservers.stream().anyMatch(e -> e.getEmail().equalsIgnoreCase(emailSaisi)) &&
+                employeObservers.stream().anyMatch(e -> e.getMotDePasse().equalsIgnoreCase(passWord)));
         if (existe) {
             System.out.println("Connection réussi !");
             return;
