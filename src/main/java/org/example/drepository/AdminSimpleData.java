@@ -19,6 +19,9 @@ public class AdminSimpleData implements SimpleDataI<Admin> {
     //creation d'un objet gson avec un formatage bien lisible pour sauvegarder er charger nos donnees gson
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+    public AdminSimpleData() {
+    }
+
     //ecrire une liste d'admin dans le gson
     @Override
     public void saveFile(List<Admin> admins) throws IOException {

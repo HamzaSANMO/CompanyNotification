@@ -14,7 +14,7 @@ import java.util.Scanner;
 
 public class EmployeController {
 
-    public static void seConnecter(String fileName) {
+    /*public static void seConnecter(String fileName) {
         Scanner scanner = new Scanner(System.in);
         Gson gson = new Gson();
         List<EmployeObserver> employeObservers = new ArrayList<>();
@@ -48,5 +48,21 @@ public class EmployeController {
         else {
             System.out.println("L'email ou le mot de passe est incorrect");
         }
+    }*/
+
+    public static void subscribe(String username) {
+        // Placeholder : appeler la méthode de service pour s'abonner
+    }
+
+    public static void unsubscribe(String username) {
+        // Placeholder : appeler la méthode de service pour se désabonner
+    }
+
+    public static void sendMessage(String sender, String message) {
+        // Placeholder : appeler la méthode de service pour envoyer un message
+    }
+
+    public static void viewEmployeeNotifications(String username) {
+        // Placeholder : appeler la méthode de service pour afficher les notifications de l'employé
     }
 }

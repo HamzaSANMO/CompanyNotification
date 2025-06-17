@@ -2,28 +2,27 @@ package org.example;
 
 import java.util.Scanner;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import static org.example.acontroller.AdminControler.*;
+import static org.example.acontroller.AuthController.login;
+import static org.example.acontroller.AuthController.logout;
+import static org.example.acontroller.EmployeController.*;
+
 public class Main {
     private static final Scanner scanner = new Scanner(System.in);
     public static void showMainMenu() {
         while (true) {
             System.out.println("\n=== Bienvenue dans notre le Systeme de Gestion des Notifications ===");
-            System.out.println("1. Se connecter en tant qu'Admin");
-            System.out.println("2. Se connecter en tant qu'Employé");
-            System.out.println("3. Quitter");
+            System.out.println("1. Se connecter");
+            System.out.println("2. Quitter");
             System.out.print("Choisissez une option : ");
 
             String choice = scanner.nextLine();
 
             switch (choice) {
                 case "1":
-                    authenticateAdmin();
+                    login();
                     break;
                 case "2":
-                    authenticateEmployee();
-                    break;
-                case "3":
                     System.out.println("Au revoir !");
                     System.exit(0);
                 default:
@@ -32,36 +31,10 @@ public class Main {
         }
     }
 
-    // Authentification Admin
-    private static void authenticateAdmin() {
-        System.out.print("Nom d'utilisateur : ");
-        String username = scanner.nextLine();
-        System.out.print("Mot de passe : ");
-        String password = scanner.nextLine();
 
-        if (loginAdmin(username, password)) {
-            showAdminMenu();
-        } else {
-            System.out.println("Échec de l'authentification. Retour au menu principal.");
-        }
-    }
-
-    // Authentification Employé
-    private static void authenticateEmployee() {
-        System.out.print("Nom d'utilisateur : ");
-        String username = scanner.nextLine();
-        System.out.print("Mot de passe : ");
-        String password = scanner.nextLine();
-
-        if (loginEmployee(username, password)) {
-            showEmployeeMenu(username);
-        } else {
-            System.out.println("Échec de l'authentification. Retour au menu principal.");
-        }
-    }
 
     // Menu Admin
-    private static void showAdminMenu() {
+    public static void showAdminMenu() {
         while (true) {
             System.out.println("\n=== Menu Admin ===");
             System.out.println("1. Créer un compte employé");
@@ -69,7 +42,8 @@ public class Main {
             System.out.println("3. Envoyer un message");
             System.out.println("4. Voir la liste des employés");
             System.out.println("5. Voir les notifications");
-            System.out.println("6. Se déconnecter");
+            System.out.println("6. Voir les notifications");
+            System.out.println("7. Se déconnecter");
             System.out.print("Choisissez une option : ");
 
             String choice = scanner.nextLine();
@@ -78,16 +52,16 @@ public class Main {
                 case "1":
                     System.out.print("Nom d'utilisateur : ");
                     String username = scanner.nextLine();
-                    System.out.print("Mot de passe : ");
-                    String password = scanner.nextLine();
+                    System.out.print("Prenom de l'utilisateur : ");
+                    String prenom = scanner.nextLine();
                     System.out.print("Email : ");
                     String email = scanner.nextLine();
-                    createEmployeeAccount(username, password, email);
+                    createEmployeeAccount(username, prenom, email);
                     break;
                 case "2":
                     System.out.print("Nom d'utilisateur de l'employé : ");
-                    String empUsername = scanner.nextLine();
-                    checkEmployeeStatus(empUsername);
+                    String empUserMail = scanner.nextLine();
+                    checkEmployeeStatus(empUserMail);
                     break;
                 case "3":
                     System.out.print("Message : ");
@@ -101,6 +75,9 @@ public class Main {
                     viewAdminNotifications();
                     break;
                 case "6":
+                    deletetEmployees();
+                    return; // Retour au menu principal
+                case "7":
                     logout();
                     return; // Retour au menu principal
                 default:
@@ -110,7 +87,7 @@ public class Main {
     }
 
     // Menu Employé
-    private static void showEmployeeMenu(String username) {
+    public static void showEmployeeMenu(String userMail) {
         while (true) {
             System.out.println("\n=== Menu Employé ===");
             System.out.println("1. Envoyer un message");
@@ -126,16 +103,16 @@ public class Main {
                 case "1":
                     System.out.print("Message : ");
                     String message = scanner.nextLine();
-                    sendMessage(username, message);
+                    sendMessage(userMail, message);
                     break;
                 case "2":
-                    subscribe(username);
+                    subscribe(userMail);
                     break;
                 case "3":
-                    unsubscribe(username);
+                    unsubscribe(userMail);
                     break;
                 case "4":
-                    viewEmployeeNotifications(username);
+                    viewEmployeeNotifications(userMail);
                     break;
                 case "5":
                     logout();
@@ -150,5 +127,5 @@ public class Main {
     public static void main(String[] args) {
         showMainMenu();
     }
-    }
+
 }
