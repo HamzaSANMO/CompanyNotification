@@ -1,6 +1,7 @@
 package org.example.centity;
 
 import org.example.ObserverI;
+import org.example.utility.EmailService;
 
 import java.util.*;
 
@@ -98,7 +99,14 @@ public class EmployeObserver implements ObserverI {
         //conversion de la variable expediteur en une variable de type EmployerObserver
         EmployeObserver employer = (EmployeObserver) expediteur;
         //affichage du message d'un destinataire dans la console
-        System.out.println("Bonjour" + fullName() + ", vous avez reçu un message de " + employer.fullName() + ". Veillez bien vouloir consulter votre boite email.");
+        System.out.println("Bonjour" + fullName() +
+                ", vous avez reçu un message de " + employer.fullName() +
+                ". Veillez bien vouloir consulter votre boite email.");
+
+
+        //Envoie du message par email
+        EmailService.envoyerEmail(this.email, "Gestionnaire de Notification", message);
+
     }
 }
 
