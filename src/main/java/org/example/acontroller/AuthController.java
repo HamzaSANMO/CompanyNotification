@@ -60,36 +60,11 @@ public class AuthController {
             }
         }
     }
+
+    public static void logout() {
+        System.out.println("Déconnexion réussie. Retour au menu principal.");
+    }
 }
 
-   /* public static void logout() {
-        // Placeholder : appeler la méthode de service pour déconnexion
-    }
-    // Authentification Admin
-   /* public static void authenticateAdmin() {
-        System.out.print("Entrer votre email : ");
-        String userMail = scanner.nextLine();
-        System.out.print("Mot de passe : ");
-        String password = scanner.nextLine();
 
-        if (login(userMail, password)) {
-            showAdminMenu();
-        } else {
-            System.out.println("Échec de l'authentification. Retour au menu principal.");
-        }
-    }*/
-
-    // Authentification Employé
-   /* public static void authenticateEmployee() {
-        System.out.print("Nom d'utilisateur : ");
-        String userMail = scanner.nextLine();
-        System.out.print("Mot de passe : ");
-        String password = scanner.nextLine();
-
-        if (login(userMail, password)) {
-            showEmployeeMenu(userMail);
-        } else {
-            System.out.println("Échec de l'authentification. Retour au menu principal.");
-        }
-    }*/
 

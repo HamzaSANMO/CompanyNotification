@@ -1,9 +1,9 @@
 [
   {
     "idUser": "d51b1b80-3e58-499f-9708-c9f88bf320ad",
-    "nom": "azerty",
-    "prenom": "qwerty",
-    "email": "1234",
+    "nom": "Adama",
+    "prenom": "Traore",
+    "email": "Dembele@gmail.com",
     "motDePasse": "Kalanso123",
     "status": false,
     "roleAdmin": false,
@@ -11,9 +11,19 @@
   },
   {
     "idUser": "3f5be45a-091f-4f59-8a1a-56cecb7d9f7f",
-    "nom": "deate",
-    "prenom": "kfkjfjf",
-    "email": "1234",
+    "nom": "Jacouba",
+    "prenom": "Abou",
+    "email": "Abou@gmail.com",
+    "motDePasse": "Kalanso123",
+    "status": false,
+    "roleAdmin": false,
+    "notificationsRecu": []
+  },
+  {
+    "idUser": "d2648fb9-4f9f-4ab8-998c-ed0edbb8bb6e",
+    "nom": "Sidibe",
+    "prenom": "Aliou",
+    "email": "aliou@gmail.com",
     "motDePasse": "Kalanso123",
     "status": false,
     "roleAdmin": false,

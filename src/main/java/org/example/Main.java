@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import static org.example.acontroller.AdminControler.*;
 import static org.example.acontroller.AuthController.login;
+import static org.example.acontroller.AuthController.logout;
 import static org.example.acontroller.EmployeController.*;
 
 public class Main {
@@ -80,7 +81,7 @@ public class Main {
                     deletetEmployees();
                     return; // Retour au menu principal
                 case "7":
-                    //logout();
+                    logout();
                     return; // Retour au menu principal
                 default:
                     System.out.println("Option invalide. Veuillez réessayer.");
@@ -101,27 +102,27 @@ public class Main {
 
             String choice = scanner.nextLine();
 
-           /* switch (choice) {
+            switch (choice) {
                 case "1":
                     System.out.print("Message : ");
                     String message = scanner.nextLine();
-                    sendMessage(userMail, message);
+                    //sendMessage(userMail, message);
                     break;
                 case "2":
-                    subscribe(userMail);
+                    //subscribe(userMail);
                     break;
                 case "3":
-                    unsubscribe(userMail);
+                    //unsubscribe(userMail);
                     break;
                 case "4":
-                    viewEmployeeNotifications(userMail);
+                    //viewEmployeeNotifications(userMail);
                     break;
                 case "5":
                     logout();
                     return; // Retour au menu principal
                 default:
                     System.out.println("Option invalide. Veuillez réessayer.");
-            }*/
+            }
         }
     }
 
